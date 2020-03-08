@@ -25,59 +25,139 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\newpage
-
 \tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
 
-\section{Overview, Objectives, and Impact}
+\section{Overview}
 
-\subsection{Overview}
+\subsection{Scientific Rationale}
 
-\subsubsection{The Equations of Magnetohydrodynamics}
+The differential equations of magnetohydrodynamics (MHD) govern the behavior of all space plasmas, and thus are the primary equations which govern the behavior of space weather phenomena. As our reliance on space-based assets for communication, observation, and exploration has increased, the vulnerability of those assets to severe space weather events has also increased \cite{NRC2009}. If the speed and accuracy of models of space weather events can be improved, the risk to personnel and material assets in space can be reduced by providing increased warning time, allowing improved preparations to withstand the potential consequences of the event.
 
-The differential equations of magnetohydrodynamics govern the behavior of all space plasmas, and thus are the primary equations which govern the behavior of space weather phenomena. As our reliance on space-based assets for communication, observation, and exploration has increased, the vulnerability of those assets to severe space weather events has also increased \cite{NRC2009}. If the speed and accuracy of models of space weather events can be improved, the risk to personnel and material assets in space can be reduced by providing increased warning time, allowing improved preparations to withstand the potential consequences of the event.
+The MHD equations combine the mechanics of fluid flow with the effects of electric and magnetic fields. Similar to the Navier-Stokes equations, the MHD equations describe the effects of the conservation of mass, momentum, and energy. But the MHD equations also include terms for the conservation of electric charge and magnetic flux, and the interdependence of currents and magnetic fields. The detailed form of the equations is dependent on the assumptions made in their derivation. For example, for flow of an adiabatic, shock-free plasma, with a single ion species, the MHD equations \cite{Chen1984} become:
 
-The differential equations of magnetohydrodynamics (MHD) combine the mechanics of fluid flow with the effects of electric and magnetic fields. Similar to the Navier-Stokes equations, the MHD equations describe the effects of the conservation of mass, momentum, and energy. But the MHD equations also include terms for the conservation of electric charge and magnetic flux, and the interdependence of currents and magnetic fields. The detailed form of the equations is dependent on the assumptions made in their derivation. For example, for bulk flow of adiabatic, shock-free, collisional plasmas with negligible resistivity, the "ideal" MHD equations \cite{Chen1984} may be applied:
+\bigskip
+
+Gauss' Law
+\begin{equation}
+    \epsilon_0 \mathbf \nabla \cdotp \mathbf E = n_i q_i + n_e q_e
+    \label{eq:GaussLaw}
+\end{equation}
+
+Faraday's Law
+\begin{equation}
+    \mathbf \nabla \times \mathbf E = -\frac {\partial \mathbf B} {\partial t}
+    \label{eq:FaradayLaw}
+\end{equation}
+
+Magnetic divergence (no magnetic monopoles)
+\begin{equation}
+  \mathbf \nabla \cdotp \mathbf B = 0
+  \label{eq:mhd_MagneticDivergence}
+\end{equation}
+
+Amp\`{e}re's Law
+\begin{equation}
+    \frac {1} {\mu_0} \mathbf \nabla \times \mathbf B = n_i q_i \mathbf v_i + n_e q_e \mathbf v_e + \epsilon_0 \frac {\partial \mathbf E} {\partial t}
+    \label{eq:AmpereLaw}
+\end{equation}
+
+Conservation of mass ($j = i|e$)
+\begin{equation}
+    \frac {\partial n_j} {\partial t} + \mathbf \nabla \cdotp \left(n_j \mathbf v_j \right) = 0
+    \label{eq:ConservationOfMass}
+\end{equation}
+
+Conservation of momentum ($j = i|e$)
+\begin{equation}
+  m_j n_j \left[ \frac {\partial \mathbf v_j} {\partial t} + \left( \mathbf v_j \cdotp \mathbf \nabla \right) \mathbf v_j \right] = q_j n_j \left(\mathbf E + \mathbf v_j \times \mathbf B \right) - \mathbf \nabla p_j
+  \label{eq:ConservationOfMomentum}
+\end{equation}
+
+Equation of state ($j = i|e$)
+\begin{equation}
+    p_j = C_j n_j^{\gamma_j}
+    \label{eq:EquationOfState}
+\end{equation}
+
+Taken as a set, these 18 scalar equations govern 16 scalar unknowns (considering vector components as scalars). However, (\ref{eq:GaussLaw}) and (\ref{eq:mhd_MagneticDivergence}) are superfluous, since they can be obtained from the divergence of (\ref{eq:AmpereLaw}) and (\ref{eq:FaradayLaw}), respectively. We are thus left with a set of 16 equations and the same number of unknowns, so a solution is (theoretically) possible. This solution incorporates the effects of the electric and magnetic fields on plasma motion, and the effects of plasma motion on the electric and magnetic fields, in a self-consistent manner.
+
+These equations can also be used as the starting point for the investigation of specific plasma environments and phenomena. For example, space plasmas can usually be treated as collisionless, and (\ref{eq:ConservationOfMomentum}) becomes:
+
+\begin{equation}
+    \mathbf E + \mathbf v_j \times \mathbf B = 0
+    \label{eq:IdealMHDOhmLaw}
+\end{equation}
+
+\noindent This result leads to the "frozen-in" condition, in which the magnetic flux is essentially carried along by the frozen plasma. The magnetic field of the solar plasma is one if the primary inputs for models of space weather phenomena in the vicinity of planetary magnetospheres. For example, when the solar and terrestrial fields are roughly anti-parallel, magnetic field reconnection events can become more frequent and more powerful, leading to solar storms and substorms.
+
+The MHD equations can also be used to model regions progressively more distant from the Sun. For example, a simpliified two-dimensional model can be used to examine the evolution of active region magnetic fields in the solar photosphere \cite{russell2016}. In this case, the analysis occurs on a two-dimensional surface in spherical coordinates.
+
+\begin{equation}
+\begin{split}
+    \frac {\partial B_r} {\partial t} + \frac {1} {R_S \sin \theta} \frac {\partial} {\partial \theta} \left( v_{\phi} B_r \sin \theta \right) + v_{\theta} \frac {\partial B_r} {\partial \phi} \\
+    + \frac {\eta} {R_S^2 \sin \theta} \frac {\partial} {\partial \theta} \left( \sin \theta \frac {\partial B_r} {\partial \theta} \right) + \frac {\eta} {R_S^2 \sin^2 \theta} \frac {\partial^2 B_r} {\partial \phi^2} = S(\theta, \phi, t)
+    \label{eq:PhotosphereField}
+\end{split}
+\end{equation}
+
+\noindent where $\eta$ is the diffusivity, and $S$ is a source term representing the creation of new active regions. This equation can be used to model the evolution of the photospheric magnetic field represented by solar synoptic maps.
+
+Moving further outward, the connection between the surface field and the coronal field can be modeled with the potential field source surface (PFSS) model \cite{Altschuler1969}. The PFSS model is a conceptually simple model used to estimate the solar coronal magnetic field from observations of the surface magnetic field. In this model, the static coronal field is derived from a scalar magnetic potential field.
+
+\begin{align}
+    \mathbf B &= - \mathbf \nabla \phi \\
+    \nabla^2 \phi &= 0 \\
+    B_r &= - \frac {\partial \phi} {\partial r} \\
+    B_{\theta} &= - \frac {1} {r} \frac {\partial \phi} {\partial \theta} \\
+    B_{\phi} &= - \frac {1} {r \sin \theta} \frac {\partial \phi} {\partial \phi}
+    \label{eq:PFSS}
+\end{align}
+
+\noindent Despite its greatly simplified structure, the PFSS has proven so useful that it is included in the catalog of standard models offered by the Community Coordinated Modeling Center (see discussion of the CCMC below).
+
+A more rigorous model of the coronal magnetic field, developed by \cite{Endeve2003}, provides additional levels of detail in the model, including predictions of regions of trapped plasma, and the high-latitude "last closed field lines".
+
+\bigskip
 
 Conservation of mass
 \begin{equation}
-  \frac {\partial \rho} {\partial t} + \nabla \cdotp (\rho \mathbf v) = 0
-  \label{eq:mhd_conservationofmass}
+    \frac {\partial \rho} {\partial t} + \mathbf \nabla \cdotp \left(\rho \mathbf u \right) = 0
+    \label{eq:ELH1}
 \end{equation}
 
 Conservation of momentum
 \begin{equation}
-  \rho \left( \frac {\partial} {\partial t} + \mathbf v \cdotp \mathbf \nabla \right) \mathbf v = \mathbf J \times \mathbf B - \mathbf \nabla p
-  \label{eq:mhd_conservationofmomentum}
+    \frac {\partial \left( \rho \mathbf u \right)} {\partial t} + \mathbf \nabla \cdotp \left(\rho u \mathbf u \right) = - \mathbf \nabla P - \frac {G M_S} {r^2} \rho \mathbf {\hat r} + \mathbf j \times \mathbf B
+    \label{eq:ELH2}
 \end{equation}
 
-Conservation of energy
+Amp\`ere's Law
 \begin{equation}
-  \frac {d} {dt} \left( \frac {p} {\rho^{\gamma}} \right) = 0
-  \label{eq:mhd_conservationofenergy}
+    \mathbf j = \frac {1} {\mu_0} \mathbf \nabla \times \mathbf B
+    \label{eq:ELH3}
 \end{equation}
 
-Ampere's law
+Magnetic induction
 \begin{equation}
-  \mu_0 \mathbf J = \mathbf \nabla \times \mathbf B
-  \label{eq:mhd_ampereslaw}
+    \frac {\partial B} {\partial t} = \mathbf \nabla \times \left( \mathbf u \times \mathbf B \right)
+    \label{eq:ELH4}
 \end{equation}
 
-Magnetic divergence
+Ideal gas law
 \begin{equation}
-  \mathbf \nabla \cdotp \mathbf B = 0
-  \label{eq:mhd_magneticdivergence}
+    P = \frac {n k T} {m}
+    \label{eq:ELH5}
 \end{equation}
 
-Various forms of these equations are implemented in a variety of models used to analyze space plasmas. Models used for day-to-day space weather monitoring and prediction typically have a longer heritage than research models. For example, the NOAA Space Weather Prediction Center \cite{swpc} maintains a stable of operational models and a large archive of historical data of solar activity and space weather. These products are used to produce short-term (3-day) and long-term (27-day) forecasts of solar activity and space weather conditions, which are also used as the basis for geomagnetic storm and other space weather warnings.
+Beyond the corona, the solar atmosphere merges into the solar wind. The solar wind is typically modeled as a high-speed collisionless plasma with a frozen-in magnetic field. Various forms of the MHD equations are implemented in a variety of models used to analyze space plasmas. Models used for day-to-day space weather monitoring and prediction typically have a longer heritage than research models. For example, the NOAA Space Weather Prediction Center \cite{swpc} maintains a stable of operational models and a large archive of historical data of solar activity and space weather. These products are used to produce short-term (3-day) and long-term (27-day) forecasts of solar activity and space weather conditions, which are also used as the basis for geomagnetic storm and other space weather warnings.
 
 An example of these models is the WSA-ENLIL combined model \cite{wsaenlil}. This model has been used operationally at the NOAA SWPC since 2011. It is a semi-empirical model that predicts the speed, density, temperature, magnetic field, and other parameters of the “ambient” (non-CME) solar wind at 1 AU, and is thus a useful predictive tool for terrestrial space weather events. This model was deployed because full three-dimensional MHD simulations still take too much time to set up, run, and validate. The modeling system consists of two main parts: (1)  a semi-empirical near-Sun module (WSA - Wang-Sheeley-Arge \cite{Arge2000},\cite{SheeleyJr2017}) that approximates the outflow at the base of the solar wind; and (2) ENLIL \cite{enlil}, a sophisticated three-dimensional magnetohydrodynamic numerical model that simulates the resulting flow  evolution out to 1 AU. In addition to the SWPC, a wide variety of modern and legacy research models are available at the NASA Community Coordinated Modeling Center \cite{ccmc} at the NASA Goddard Space Flight Center. The results of these models are made available with scheduled and on-demand runs for the community, as well as an extensive archive.
 
-\subsubsection{Solving Differential Equations}
+\subsection{Solving Differential Equations}
 
 The MHD equations (in any form) constitute a set of coupled partial differential equations (PDEs) that are second-order in spatial variables and first-order in time. Additionally, since these equations arise from conservation laws, the partial differential equations themselves are \textit{hyperbolic}. Hyperbolic equations result in solutions with propagating behavior - a wave equation is a typical case. Solutions may be found using any of the current standard techniques for PDEs. Chief among these are the finite difference method (FDM) and the finite element method (FEM).
 
@@ -744,7 +824,7 @@ This stage will require integration of new code for handling boundary conditions
 
 Planned completion date: October 2020
 
-This will be a relatively straightforward addition to the software. The modifications will start with simple aggregation of network outputs and errors in an overarching error function, and the consequent additional level of derivatives. This approach has already been shown to work in the literature \cites{Lagaris1998}.
+This will be a relatively straightforward addition to the software. The modifications will start with simple aggregation of network outputs and errors in an overarching error function, and the consequent additional level of derivatives. This approach has already been shown to work in the literature \cite{Lagaris1998}.
 
 \subsection{Demonstrate Applicability to MHD Equations for Space Weather}
 
@@ -760,7 +840,7 @@ Planned completion date: December 2021
 
 \medskip
 
-\printbibliography[heading=bibintoc]
+%\printbibliography[heading=bibintoc]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
