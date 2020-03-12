@@ -37,7 +37,7 @@
 
 The differential equations of magnetohydrodynamics (MHD) govern the behavior of all space plasmas, and thus are the primary equations which govern the behavior of space weather phenomena. As our reliance on space-based assets for communication, observation, and exploration has increased, the vulnerability of those assets to severe space weather events has also increased \cite{NRC2009}. If the speed and accuracy of models of space weather events can be improved, the risk to personnel and material assets in space can be reduced by providing increased warning time, allowing improved preparations to withstand the potential consequences of the event.
 
-The MHD equations combine the mechanics of fluid flow with the effects of electric and magnetic fields. Similar to the Navier-Stokes equations, the MHD equations describe the effects of the conservation of mass, momentum, and energy. But the MHD equations also include terms for the conservation of electric charge and magnetic flux, and the interdependence of currents and magnetic fields. The detailed form of the equations is dependent on the assumptions made in their derivation. For example, for flow of an adiabatic, shock-free plasma, with a single ion species, the MHD equations \cite{Chen1984} become:
+The MHD equations combine the mechanics of fluid flow with Maxwell's equations of electrodynamics. Similar to the Navier-Stokes equations, the MHD equations describe the effects of the conservation of mass, momentum, and energy. But the MHD equations also include terms for the conservation of electric charge and magnetic flux, and the interdependence of currents, electric, and magnetic fields. The detailed form of the equations is dependent on the assumptions made in their derivation. For example, for flow of an adiabatic, shock-free plasma, with a single ion species, the MHD equations \cite{Chen1984} become:
 
 \bigskip
 
@@ -85,7 +85,7 @@ Equation of state ($j = i|e$)
 
 Taken as a set, these 18 scalar equations govern 16 scalar unknowns (considering vector components as scalars). However, (\ref{eq:GaussLaw}) and (\ref{eq:mhd_MagneticDivergence}) are superfluous, since they can be obtained from the divergence of (\ref{eq:AmpereLaw}) and (\ref{eq:FaradayLaw}), respectively. We are thus left with a set of 16 equations and the same number of unknowns, so a solution is (theoretically) possible. This solution incorporates the effects of the electric and magnetic fields on plasma motion, and the effects of plasma motion on the electric and magnetic fields, in a self-consistent manner.
 
-These equations can also be used as the starting point for the investigation of specific plasma environments and phenomena. For example, space plasmas can usually be treated as collisionless, and (\ref{eq:ConservationOfMomentum}) becomes:
+These equations can be used as the starting point for the investigation of specific plasma environments and phenomena. For example, space plasmas can usually be treated as collisionless, and (\ref{eq:ConservationOfMomentum}) becomes:
 
 \begin{equation}
     \mathbf E + \mathbf v_j \times \mathbf B = 0
@@ -94,19 +94,19 @@ These equations can also be used as the starting point for the investigation of 
 
 \noindent This result leads to the "frozen-in" condition, in which the magnetic flux is essentially carried along by the frozen plasma. The magnetic field of the solar plasma is one if the primary inputs for models of space weather phenomena in the vicinity of planetary magnetospheres. For example, when the solar and terrestrial fields are roughly anti-parallel, magnetic field reconnection events can become more frequent and more powerful, leading to solar storms and substorms.
 
-The MHD equations can also be used to model regions progressively more distant from the Sun. For example, a simpliified two-dimensional model can be used to examine the evolution of active region magnetic fields in the solar photosphere \cite{russell2016}. In this case, the analysis occurs on a two-dimensional surface in spherical coordinates.
+The MHD equations can be used to model regions progressively more distant from the Sun. For example, a simpliified two-dimensional MHD model can be used to examine the evolution of active region magnetic fields in the solar photosphere \cite{russell2016}. In this case, the analysis occurs on a two-dimensional surface in spherical coordinates (\ref{eq:PhotosphereField}).
 
 \begin{equation}
 \begin{split}
     \frac {\partial B_r} {\partial t} + \frac {1} {R_S \sin \theta} \frac {\partial} {\partial \theta} \left( v_{\phi} B_r \sin \theta \right) + v_{\theta} \frac {\partial B_r} {\partial \phi} \\
-    + \frac {\eta} {R_S^2 \sin \theta} \frac {\partial} {\partial \theta} \left( \sin \theta \frac {\partial B_r} {\partial \theta} \right) + \frac {\eta} {R_S^2 \sin^2 \theta} \frac {\partial^2 B_r} {\partial \phi^2} = S(\theta, \phi, t)
+    + \frac {\eta} {R_S^2 \sin \theta} \frac {\partial} {\partial \theta} \left( \sin \theta \frac {\partial B_r} {\partial \theta} \right) + \frac {\eta} {R_S^2 \sin^2 \theta} \frac {\partial^2 B_r} {\p artial \phi^2} = S(\theta, \phi, t)
     \label{eq:PhotosphereField}
 \end{split}
 \end{equation}
 
 \noindent where $\eta$ is the diffusivity, and $S$ is a source term representing the creation of new active regions. This equation can be used to model the evolution of the photospheric magnetic field represented by solar synoptic maps.
 
-Moving further outward, the connection between the surface field and the coronal field can be modeled with the potential field source surface (PFSS) model \cite{Altschuler1969}. The PFSS model is a conceptually simple model used to estimate the solar coronal magnetic field from observations of the surface magnetic field. In this model, the static coronal field is derived from a scalar magnetic potential field.
+Moving further outward, the connection between the surface field and the coronal field can be modeled with the potential field source surface (PFSS) model \cite{Altschuler1969}. The PFSS model is a conceptually simple model used to estimate the solar coronal magnetic field from observations of the surface magnetic field. In this model, the static coronal field is derived from a scalar magnetic potential field:
 
 \begin{align}
     \mathbf B &= - \mathbf \nabla \phi \\
@@ -119,7 +119,7 @@ Moving further outward, the connection between the surface field and the coronal
 
 \noindent Despite its greatly simplified structure, the PFSS has proven so useful that it is included in the catalog of standard models offered by the Community Coordinated Modeling Center (see discussion of the CCMC below).
 
-A more rigorous model of the coronal magnetic field, developed by \cite{Endeve2003}, provides additional levels of detail in the model, including predictions of regions of trapped plasma, and the high-latitude "last closed field lines".
+A more rigorous model of the coronal magnetic field, developed by \cite{Endeve2003}, provides additional levels of detail in the model, including predictions of regions of trapped plasma, and the high-latitude "last closed field lines":
 
 \bigskip
 
@@ -178,23 +178,19 @@ When the boundary conditions are dynamic, there are two basic modifications whic
 
 \subsection{Objectives and Impact}
 
-The objective of the proposed work is to develop a software system which implements a set of neural networks which can be used to solve the MHD equations relevant to space plasmas. Since solution methods for equilibrium conditions are already well-established, the emphasis of the proposed work will be on problems with time-dependent boundary conditions.
+The objective of the proposed work is to develop a demonstrate the use of a set of neural networks to efficiently solve the MHD equations under physical situations relevant to space weather phenomena. Since solution methods for equilibrium conditions are already well-established, the emphasis of the proposed work will be on problems with time-dependent boundary conditions.
 
-\subsubsection{Make the Solutions More Useful}
+\subsubsection{Demonstrate the Utility of the Neural Network Computational Approach}
 
 The nature of a neural network solution provides two important benefits to solving differential equations. First, since the solution is mesh-free, no interpolation or recomputation is required to generate solution values at points not used in the training process. Second, since the neural network approach provides an analytical form for the solution, the solution is easily differentiable. Previous work has claimed that the solutions are "infinitely" differentiable \cite{Lagaris1998}, and this is mathematically correct. However, experience gained during the early phases of this work have shown that the accurate differentiability extends only over a small range of orders. In the problems examined to date (typically second-order PDEs), the numerical values of the computed  derivatives become less accurate as the order of differentiation is increased. One of the goals of this work is to quantify the accuracy of the derivatives of the neural network solution. This investigation will provide constraints on the degree of differentiation that can be usefully applied to a neural network solution. These constraints will improve the ability to match any Neumann boundary conditions set for the problem, which will be particularly useful when estimating mass and energy fluxes at the boundaries of the problem domain.
 
-\subsubsection{Make the Solutions Faster}
+Every increase in model computation speed will provide increased lead time to prepare for a space weather event. Neural network methods are inherently logically parallel - computations at each node are completely independent of any other node in the same layer. Neural networks are thus more easily adapted to take advantage of parallel computing hardware. This will allow rapid scaling of problem size and solution speed, as the neural network software can take advantage of both local (multi-core, multi-thread, and GPU/accelerator) and non-local (multi-node) parallelism. This capability will be particularly important for three-dimensional MHD problems, for which a large number of training points will be required.
 
-Every increase in model computation speed will provide increased lead time to prepare for a space weather event. Neural network methods are inherently logically parallel - computations at each node are completely independent of any other node in the same layer. Neural networks are thus more easily adapted to take advantage of parallel computing hardware. This will allow rapid scaling of problem size and solution speed, as the neural network software can take advantage of both local (multi-core, multi-thread, and GPU/accelerator) and non-local (multi-node) parallelism. This capability will be particularly important for three-dimensional MHD problems, for which a large number of training points will be required. At each stage, the neural network results will be compared to equivalent results using FDM and/or FEM, to discover the parameter spaces where each method is the faster solution.
+\subsubsection{Demonstrate the Utility of the Compact Neural Network Solutions}
 
-\subsubsection{Make the Solutions Easier}
-
-Multi-variable optimization problems always involve the computation of multiple levels of derivatives for the quantities under consideration. Open-source tools are now available, e.g. \cite{sympy}, with which a differential equation and its boundary conditions can be defined symbolically. These symbolic representations can then be used to automatically generate the symbolic representation, and corresponding code, for the derivatives of the physical quantities described by the differential equations and associated boundary conditions. This capability is particularly important when the problem domain is non-orthonormal. Domain orthonormality is assumed for the purpose of illustration in the developments below, but real-world problems typically cannot be represented in this fashion. This approach will allow the neural network software to be used in a fashion similar to "canned" PDE solvers, but without the need to pre-compute the form of each derivative. Irregular domain boundaries will be incorporated into the solution process without requiring additional precomputation.
-
-\subsubsection{Make the Solutions Available}
-
-The software developed so far for this effort \cite{nnode} is open-source, and made available for community use on GitHub \cite{github}. Over the past two years, several experimental versions of the software for this effort have been developed. These early versions of the code have already been downloaded and/or forked several times from GitHub and used by other researchers. The rapidly-moving field of machine learning requires this approach to ensure that the latest theoretical advances are rapidly incorporated into the software.
+ The parameter vectors generated by the neural networks can then be used to generate a compact form of a set of reference solutions for the MHD equations under physically realistic conditions. The software developed so far for this effort \cite{nnode} is open-source, and made available for community use on GitHub \cite{github}. Over the past two years, several experimental versions of the software for this effort have been developed. These early versions of the code have already been downloaded and/or forked several times from GitHub and used by other researchers. The rapidly-moving field of machine learning requires this approach to ensure that the latest theoretical advances are rapidly incorporated into the software.
+ 
+ The parameter vectors will be generated over a range of parameter spaces, from the solar photosphere to the terrestrial magnetosphere interface. Existing standard methods, such as those discussed in the previous section, will be used as a basis for comparison for the neural network solutions. At each stage, the neural network results will be compared to equivalent results using FDM and/or FEM, to discover the parameter spaces where each method is the faster solution. The result will be a set of neural network alternative solutions for each of the space plasma regimes examined.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -798,31 +794,23 @@ The examples shown above, and many others not shown, indicate that the initial v
 
 \section{Timeline}
 
-The existing \texttt{nnode} code will be enhanced in stages. At each stage, code will be tested using a standardized set of example problems. These problems will include those with analytical solutions as well as those which require FDM or FEM solutions. This will be done to ensure that the new code does not create a regression in the existing code. Validation of results will be completely automated, and built into the test suite for the entire \texttt{nnode} package. Numerical solutions will be computed with a standard PDE solution package, such as the NDSolve() function in Mathematica.
+The existing \texttt{nnode} code will be enhanced in stages. At each stage, code will be tested using a standardized set of generic example problems, as well as the results of standard space physics models (see discussion in previous sections). These problems will include those with analytical solutions as well as those which require FDM or FEM solutions. Validation of results will be completely automated, and built into the test suite for the entire \texttt{nnode} package. Numerical solutions will be generated by 3rd-party data providers, e.g. CCMC, or computed with a standard PDE solution package, such as the NDSolve() function in Mathematica.
 
-\subsection{Incorporate Symbolic Processing of Differential Equations}
+\subsection{Select Reference Scenarios}
 
-Planned completion date: February 2020
+Planned completion date: April 2020
 
-In this stage, the code will be upgraded to allow symbolic problem specification. This may be a discrete pre-processing step, or integrated directly into the solution mechanism. The strongest candidate for use in this upgrade is the Python package \texttt{SymPy} \cite{sympy}. Experimentation with \texttt{SymPy} has shown that it can perform the symbolic differentiation of the differential equation, and generate executable Python code for the derivatives. This generated code can then be immediately used in the solution without manual intervention. The code will then be able to automatically generate the executable code for the differential equation and all required derivatives. This step will be done first since preparation of code for derivatives is the most time-consuming step of preparing a problem for solution with the \texttt{nnode} package.
+In this stage, a definitive list of reference problems, both generic and space weather-specific, will be documented. Generic problems from the literature, e.g. \cite{Lagaris1998} will be used, as well as a carefully-selected set of models from the space physics community, such as the CCMC and the SWPC.
 
 \subsection{Adapt Code to Multiprocessing System}
 
-Planned completion date: May 2020
+Planned completion date: August 2020
 
-In this stage, the code will be upgraded to take advantage of parallel computing facilities. Initially, this work will target the science computing cluster at the Space Telescope Science Institute in Baltimore, Maryland. This first stage will involve coarse parallelization - splitting the computation among available cores on the host machines. If time permits, the code will be further upgraded to take advantage of available accelerator technology, e.g. general-purpose graphical processing (GPGPU) cards. The progress of this latter capability will be dependent upon resource availability. If needed, existing GPGPU facilities at GMU will be utilized. Completion of this step will greatly broaden the scope of problems which can be addressed by the \texttt{nnode} software. Based on past experience with parallel codes, execution speed is expected to increase by at least an order of magnitude.
-
-The core of the code may undergo a redesign at this stage, to incorporate higher-performance machine learning libraries, such as TensorFlow and PyTorch.
-
-\subsection{Add Processing of Irregular Boundary Conditions}
-
-Planned completion date: September 2020
-
-This stage will require integration of new code for handling boundary conditions which are not orthonormal. There have been multiple approaches to this problem discussed in the literature. Most of these techniques have been developed to handle situations where the physical shape of the boundary is highly irregular. However, given the large, smoothly-varying volume domains inherent in space weather situations, a simpler method will be developed (either \emph{de novo}, or by adapting an existing method) which will be incorporated into the code. It will be critical at this point to ensure that the method for handling irregular boundary conditions can be smoothly integrated into the existing code base. One possible approach is parameterization of position on the boundary, which should allow treatment of the boundary as an additional set of problem dimensions.
+In this stage, the code will be upgraded to take advantage of parallel computing facilities. Initially, this work will target the science computing cluster at the Space Telescope Science Institute in Baltimore, Maryland. This first stage will involve coarse parallelization - splitting the computation among available cores on the host machines. If time permits, the code will be further upgraded to take advantage of available accelerator technology, e.g. general-purpose graphical processing (GPGPU) cards. The progress of this latter capability will be dependent upon resource availability. If needed, existing GPGPU facilities at GMU will be utilized. Completion of this step will greatly broaden the scope of problems which can be addressed by the \texttt{nnode} software. Based on past experience with parallel codes, execution speed is expected to increase by at least an order of magnitude. The core of the code may undergo a redesign at this stage, to incorporate higher-performance machine learning libraries, such as TensorFlow and PyTorch.
 
 \subsection{Add Capability to Solve Systems of PDEs}
 
-Planned completion date: October 2020
+Planned completion date: December 2020
 
 This will be a relatively straightforward addition to the software. The modifications will start with simple aggregation of network outputs and errors in an overarching error function, and the consequent additional level of derivatives. This approach has already been shown to work in the literature \cite{Lagaris1998}.
 
