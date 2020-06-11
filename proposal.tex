@@ -13,7 +13,7 @@
 
 \title{Applications of Neural Networks to Solve the Differential Equations of Magnetohydrodynamics}
 
-\author{Ph.D. Thesis Proposal (DRAFT)\\Eric Winter (George Mason University)}
+\author{Ph.D. Thesis Proposal\\Eric Winter\\George Mason University\\Department of Physics and Astronomy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -47,43 +47,43 @@ The proposed work will provide a novel capability for efficiently solving the eq
 
 The differential equations of magnetohydrodynamics (MHD) govern the behavior of all space plasmas, and thus are the primary equations which govern the behavior of space weather phenomena. As our reliance on space-based assets for communication, observation, and exploration has increased, the vulnerability of those assets to severe space weather events has also increased \cite{NRC2009}. If the speed and accuracy of models of space weather events can be improved, the risk to personnel and material assets in space can be reduced by providing increased warning time, allowing improved preparations to withstand the potential consequences of the event.
 
-The MHD equations combine the mechanics of fluid flow with Maxwell's equations of electrodynamics. Similar to the Navier-Stokes equations, the MHD equations describe the effects of the conservation of mass, momentum, and energy. But the MHD equations also account for the conservation of electric charge and magnetic flux, and the interdependence of charges, currents, electric, and magnetic fields. The detailed form of the equations is dependent on the assumptions made in their derivation. For example, for flow of an ideal, adiabatic, shock-free plasma, with a single ion species (the "single-fluid" case), the MHD equations \cite{Chen1984} become:
+The MHD equations combine the mechanics of fluid flow with Maxwell's equations of electrodynamics. Similar to the Navier-Stokes equations, the MHD equations describe the effects of the conservation of mass, momentum, and energy. But the MHD equations also account for the conservation of electric charge and magnetic flux, and the interdependence of charges, currents, electric, and magnetic fields. The detailed form of the equations is dependent on the assumptions made in their derivation. For example, for flow of an ideal, adiabatic, shock-free plasma, with a single ion species (the ``single-fluid" case), the MHD equations \cite{Chen1984} become:
 
 \bigskip
 
 Gauss' Law
 \begin{equation}
-    \epsilon_0 \mathbf \nabla \cdotp \mathbf E = n_i q_i + n_e q_e
+    \epsilon_0 \nabla \cdotp \mathbf E = n_i q_i + n_e q_e
     \label{eq:GaussLaw}
 \end{equation}
 
 Faraday's Law
 \begin{equation}
-    \mathbf \nabla \times \mathbf E = -\frac {\partial \mathbf B} {\partial t}
+    \nabla \times \mathbf E = -\frac {\partial \mathbf B} {\partial t}
     \label{eq:FaradayLaw}
 \end{equation}
 
 Magnetic divergence (no magnetic monopoles)
 \begin{equation}
-  \mathbf \nabla \cdotp \mathbf B = 0
+  \nabla \cdotp \mathbf B = 0
   \label{eq:mhd_MagneticDivergence}
 \end{equation}
 
 Amp\`{e}re's Law
 \begin{equation}
-    \frac {1} {\mu_0} \mathbf \nabla \times \mathbf B = n_i q_i \mathbf v_i + n_e q_e \mathbf v_e + \epsilon_0 \frac {\partial \mathbf E} {\partial t}
+    \frac {1} {\mu_0} \nabla \times \mathbf B = n_i q_i \mathbf v_i + n_e q_e \mathbf v_e + \epsilon_0 \frac {\partial \mathbf E} {\partial t}
     \label{eq:AmpereLaw}
 \end{equation}
 
 Conservation of mass ($j = i|e$)
 \begin{equation}
-    \frac {\partial n_j} {\partial t} + \mathbf \nabla \cdotp \left(n_j \mathbf v_j \right) = 0
+    \frac {\partial n_j} {\partial t} + \nabla \cdotp \left(n_j \mathbf v_j \right) = 0
     \label{eq:ConservationOfMass}
 \end{equation}
 
 Conservation of momentum ($j = i|e$)
 \begin{equation}
-  m_j n_j \left[ \frac {\partial \mathbf v_j} {\partial t} + \left( \mathbf v_j \cdotp \mathbf \nabla \right) \mathbf v_j \right] = q_j n_j \left(\mathbf E + \mathbf v_j \times \mathbf B \right) - \mathbf \nabla P_j - m_j n_j \nu_{jn} \mathbf v_j
+  m_j n_j \left[ \frac {\partial \mathbf v_j} {\partial t} + \left( \mathbf v_j \cdotp \nabla \right) \mathbf v_j \right] = q_j n_j \left(\mathbf E + \mathbf v_j \times \mathbf B \right) - \nabla P_j - m_j n_j \nu_{jn} \mathbf v_j
   \label{eq:ConservationOfMomentum}
 \end{equation}
 
@@ -102,7 +102,7 @@ These equations can be used as the starting point for the investigation of speci
     \label{eq:IdealMHDOhmLaw}
 \end{equation}
 
-\noindent This result leads to the "frozen-in" condition, in which the magnetic flux is essentially carried along by the flowing plasma. The magnetic field of the solar plasma is one of the primary inputs for models of space weather phenomena in the vicinity of planetary magnetospheres. For example, when the solar and terrestrial fields are roughly anti-parallel, magnetic field reconnection events can become more frequent and more powerful, leading to solar storms and substorms.
+\noindent This result leads to the ``frozen-in" condition, in which the magnetic flux is essentially carried along by the flowing plasma. The magnetic field of the solar plasma is one of the primary inputs for models of space weather phenomena in the vicinity of planetary magnetospheres. For example, when the solar and terrestrial fields are roughly anti-parallel, magnetic field reconnection events can become more frequent and more powerful, leading to solar storms and substorms.
 
 The MHD equations can be used to model regions progressively more distant from the Sun. For example, a simpliified two-dimensional MHD model can be used to examine the evolution of active region magnetic fields in the solar photosphere \cite{russell2016}. In this case, the analysis occurs on a two-dimensional surface in spherical coordinates (\ref{eq:PhotosphereField}).
 
@@ -119,7 +119,7 @@ The MHD equations can be used to model regions progressively more distant from t
 Moving further outward, the connection between the surface field and the coronal field can be modeled with the potential field source surface (PFSS) model \cite{Altschuler1969}. The PFSS model is a conceptually simple model used to estimate the solar coronal magnetic field from observations of the surface magnetic field. In this model, the static coronal field is derived from a scalar magnetic potential field:
 
 \begin{align}
-    \mathbf B &= - \mathbf \nabla \phi \\
+    \mathbf B &= - \nabla \phi \\
     \nabla^2 \phi &= 0 \\
     B_r &= - \frac {\partial \phi} {\partial r} \\
     B_{\theta} &= - \frac {1} {r} \frac {\partial \phi} {\partial \theta} \\
@@ -135,25 +135,25 @@ A more rigorous model of the coronal magnetic field, developed by \cite{Endeve20
 
 Conservation of mass
 \begin{equation}
-    \frac {\partial \rho} {\partial t} + \mathbf \nabla \cdotp \left(\rho \mathbf u \right) = 0
+    \frac {\partial \rho} {\partial t} + \nabla \cdotp \left(\rho \mathbf u \right) = 0
     \label{eq:ELH1}
 \end{equation}
 
 Conservation of momentum
 \begin{equation}
-    \frac {\partial \left( \rho \mathbf u \right)} {\partial t} + \mathbf \nabla \cdotp \left(\rho u \mathbf u \right) = - \mathbf \nabla P - \frac {G M_S} {r^2} \rho \mathbf {\hat r} + \mathbf j \times \mathbf B
+    \frac {\partial \left( \rho \mathbf u \right)} {\partial t} + \nabla \cdotp \left(\rho u \mathbf u \right) = - \nabla P - \frac {G M_S} {r^2} \rho \mathbf {\hat r} + \mathbf j \times \mathbf B
     \label{eq:ELH2}
 \end{equation}
 
 Amp\`ere's Law
 \begin{equation}
-    \mathbf j = \frac {1} {\mu_0} \mathbf \nabla \times \mathbf B
+    \mathbf j = \frac {1} {\mu_0} \nabla \times \mathbf B
     \label{eq:ELH3}
 \end{equation}
 
 Magnetic induction
 \begin{equation}
-    \frac {\partial B} {\partial t} = \mathbf \nabla \times \left( \mathbf u \times \mathbf B \right)
+    \frac {\partial B} {\partial t} = \nabla \times \left( \mathbf u \times \mathbf B \right)
     \label{eq:ELH4}
 \end{equation}
 
@@ -165,7 +165,7 @@ Ideal gas law
 
 Beyond the corona, the solar atmosphere merges into the solar wind. The solar wind is typically modeled as a high-speed collisionless plasma with a frozen-in magnetic field. Various forms of the MHD equations are implemented in a variety of models used to analyze the solar wind. Models used for day-to-day space weather monitoring and prediction typically have a longer heritage than research models. For example, the NOAA Space Weather Prediction Center \cite{swpc} maintains a stable of operational models and a large archive of historical data of solar activity and space weather. These products are used to produce short-term (3-day) and long-term (27-day) forecasts of solar activity and space weather conditions, which are also used as the basis for geomagnetic storm and other space weather warnings.
 
-An example of these models is the WSA-ENLIL combined model \cite{wsaenlil}. This model has been used operationally at the NOAA SWPC since 2011. It is a semi-empirical model that predicts the speed, density, temperature, magnetic field, and other parameters of the “ambient” (non-CME) solar wind at 1 AU, and is thus a useful predictive tool for terrestrial space weather events. This model was deployed because full three-dimensional MHD simulations still take too much time to set up, run, and validate. The modeling system consists of two main parts: (1)  a semi-empirical near-Sun module (WSA - Wang-Sheeley-Arge \cite{Arge2000},\cite{SheeleyJr2017}) that approximates the outflow at the base of the solar wind; and (2) ENLIL \cite{enlil}, a sophisticated three-dimensional magnetohydrodynamic numerical model that simulates the resulting flow  evolution out to 1 AU. In addition to the SWPC, a wide variety of modern and legacy research models are available at the NASA Community Coordinated Modeling Center (CCMC) \cite{ccmc} at the NASA Goddard Space Flight Center. The results of these models are made available with scheduled and on-demand runs for the community, as well as an extensive archive.
+An example of these models is the WSA-ENLIL combined model \cite{wsaenlil}. This model has been used operationally at the NOAA SWPC since 2011. It is a semi-empirical model that predicts the speed, density, temperature, magnetic field, and other parameters of the “ambient” (non-CME) solar wind at 1 AU, and is thus a useful predictive tool for terrestrial space weather events. This model was deployed because full three-dimensional MHD simulations still take too much time to set up, run, and validate. The modeling system consists of two main parts: (1)  a semi-empirical near-Sun module (WSA - Wang-Sheeley-Arge \cite{Arge2000},\cite{Sheeley2017}) that approximates the outflow at the base of the solar wind; and (2) ENLIL \cite{enlil}, a sophisticated three-dimensional magnetohydrodynamic numerical model that simulates the resulting flow  evolution out to 1 AU. In addition to the SWPC, a wide variety of modern and legacy research models are available at the NASA Community Coordinated Modeling Center (CCMC) \cite{ccmc} at the NASA Goddard Space Flight Center. The results of these models are made available with scheduled and on-demand runs for the community, as well as an extensive archive.
 
 \subsection{Solving Differential Equations}
 
@@ -175,13 +175,13 @@ In the finite difference method \cite{Heath2002}, derivatives of the function fi
 
 In the finite element method \cite{DeVries2011}, the problem domain is also subdivided into a mesh, and the differential equations of the system are defined for each subvolume of the domain. The collection of equations is then used to define a global error function. This error function is then minimized by an appropriate method, and the parameter vector which minimizes the error function defines the solution to the problem. Like FDM, changes in location, system parameters, or boundary conditions require an interpolation scheme or a completely new solution cycle. FEM solutions also suffer from the same parallelization difficulties as FDM, leading to complicated code for large problems. Both FDM and FEM techniques suffer from increased approximation error as a function of time \cite{Carnahan1969}, which can lead to additional recomputations of the solutions for new boundary conditions. Adaptive mesh refinement, e.g. \cite{Berger1989}, can improve the quality of the solution in regions of rapid change, but solutions are still only available at the selected grid points. Several packages are available to address these issues, such as the widely-used PETSc toolkit \cite{petsc}, which provides support for the parallel distribution of matrices used in finite element models.
 
-Since the late 1980s, new approaches for the solution of differential equations have been developed which take advantage of neural networks. There are a variety of techniques available, but all take advantage of one of the most mathematically useful aspects of neural networks - the ability to act as a "universal approximator" \cite{Hornik1989}. This capability was later shown to extend to approximation of the derivatives of the function \cite{Hornik1990}. The development of this field has been surveyed in recent comprehensive reviews \cite{Yadav2015,Chakraverty2017}. Neural network techniques generate mesh-free solutions which are differentiable to a useful extent, and are easily parallelized on modern multicore computers \cite{Schuessler2011}. Drawbacks can include lengthy training times, especially in cases where local minima in the error function are encountered. Such situations can exacerbate the already long training times which result from solving higher-dimensional problems - the so-called "curse of dimensionality". However, neural network techniques have shown promise in improving performance over traditional finite difference solutions of PDEs of high dimensionality (Figure \ref{fig:Avrutskiy_2017}).
+Since the late 1980s, new approaches for the solution of differential equations have been developed which take advantage of neural networks. There are a variety of techniques available, but all take advantage of one of the most mathematically useful aspects of neural networks - the ability to act as a "universal approximator" \cite{Hornik1989}. This capability was later shown to extend to approximation of the derivatives of the function \cite{Hornik1990}. The development of this field has been surveyed in recent comprehensive reviews \cite{Yadav2015,Chakraverty2017}. Neural network techniques generate mesh-free solutions which are differentiable to a useful extent, and are easily parallelized on modern multicore computers \cite{Schuessler2011}. Drawbacks can include lengthy training times, especially in cases where local minima in the error function are encountered. Such situations can exacerbate the already long training times which result from solving higher-dimensional problems - the so-called "curse of dimensionality". However, neural network techniques have shown promise in improving performance over traditional finite difference solutions of PDEs of high dimensionality (Figure \ref{fig:Avrutskiy_2020}).
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.75\textwidth]{Avrutskiy_2017.png}
-  \caption{A comparison of solution times for neural network and 2nd-order finite difference methods for increasing problem dimensionality. The data were generated by specifying the analytical form of scalar functions of up to 5 independent variables, and substituting these solutions into linear and nonlinear forms of the Poisson equation. Training and testing points were randomly distributed on the surface of an $n$-dimensional hypersphere. Neural networks with up to 6 hidden layers were then trained to generate the solutions to compare against finite-difference solutions. Networks were trained using a GPGPU-equipped computer, and 32-bit precision. \cite{Avrutskiy2017}}
-  \label{fig:Avrutskiy_2017}
+  \includegraphics[width=0.75\textwidth]{Avrutskiy_2020.png}
+  \caption{A comparison of solution times for neural network and 2nd-order finite difference methods for increasing problem dimensionality. The data were generated by specifying the analytical form of scalar functions of up to 5 independent variables, and substituting these solutions into linear and nonlinear forms of the Poisson equation. Training and testing points were randomly distributed on the surface of an $n$-dimensional hypersphere. Neural networks with up to 6 hidden layers were then trained to generate the solutions to compare against finite-difference solutions. Networks were trained using a GPGPU-equipped computer, and 32-bit precision. \cite{Avrutskiy2020}}
+  \label{fig:Avrutskiy_2020}
 \end{figure}
 
 When the boundary conditions are dynamic, there are two basic modifications which can be made to the neural network solution. First, solutions can be generated at a representative set of times, and the solutions between those times interpolated as needed. Second, the dynamic boundary conditions themselves can be incorporated into the neural network solution itself, using either a functional or a data-based representation \cite{Lagaris1998}. The current work uses the latter approach.
@@ -268,20 +268,20 @@ The universal approximation capability of neural networks was eventually turned 
 
 The conceptually simplest method of solving differential equations using neural networks is the "trial function" method, first proposed by \cite{vanMilligen1995}, and generalized by \cite{Lagaris1998}. In this method, an approximate solution, incorporating the neural network output, is substituted into the differential equation in place of the true solution. Just as for any other model-fitting procedure, the network parameters are then adjusted, i.e. the network is trained, until the trial solution is sufficiently close to the actual solution. An early application of this method was solving for the eigenvalues of the Schr\"odinger equation \cite{Lagaris1997}.
 
-Many variations on this technique have been developed. \cite{Malek2006} showed the utility of the trial function approach for sets of ODEs of up to 4th order. \cite{Yazdi2011a}, \cite{Yazdi2011b} used the trial-function method along with a kernel least mean square algorithm to solve 1st- and 2nd-order ODEs. \cite{Chiaramonte2013} illustrated the use of the trial function method on a 2-D form of Laplace's equation. \cite{Baymani2014} used a trial-function method with a network with two hidden layers to generate solutions of the 2-dimensional Navier-Stokes equations for electroosmotic flow in a microchannel. \cite{Avrutskiy2017} used a deep-network approach with trial functions to generate solutions for PDEs of up to 5 dimensions. \cite{Berg2018} further developed the technique to allow it to be used over arbitrary spatial boundaries. A different technique for non-orthonormal problem domains was developed by \cite{McFall2009}.
+Many variations on this technique have been developed. \cite{Malek2006} showed the utility of the trial function approach for sets of ODEs of up to 4th order. \cite{Yazdi2011a}, \cite{Yazdi2011b} used the trial-function method along with a kernel least mean square algorithm to solve 1st- and 2nd-order ODEs. \cite{Chiaramonte2013} illustrated the use of the trial function method on a 2-D form of Laplace's equation. \cite{Baymani2014} used a trial-function method with a network with two hidden layers to generate solutions of the 2-dimensional Navier-Stokes equations for electroosmotic flow in a microchannel. \cite{Avrutskiy2020} used a deep-network approach with trial functions to generate solutions for PDEs of up to 5 dimensions. \cite{Berg2018} further developed the technique to allow it to be used over arbitrary spatial boundaries. A different technique for non-orthonormal problem domains was developed by \cite{McFall2009}.
 
 \subsection{The Trial Function Method}
 
 A generalized differential equation $G$ of a scalar function $\psi(\mathbf x)$ can be written in the form:
 
 \begin{equation}
-  G(\mathbf x, \psi, \mathbf \nabla \psi, \mathbf \nabla \mathbf \nabla \psi, ...) = 0
+  G(\mathbf x, \psi, \nabla \psi, \nabla \nabla \psi, ...) = 0
 \end{equation}
 
 In the trial function method, an approximate trial solution $\psi_t$ is substituted for the desired solution $\psi$ in the differential equation:
 
 \begin{equation}
-  G(\mathbf x, \psi_t, \mathbf \nabla \psi_t, \mathbf \nabla \mathbf \nabla \psi_t, ...) = 0
+  G(\mathbf x, \psi_t, \nabla \psi_t, \nabla \nabla \psi_t, ...) = 0
 \end{equation}
 
 \noindent Since the analytical form of the trial function is known, the parameters of the trial function can be adjusted until the differential equation is satisfied to the desired level of precision, while also satisfying any boundary conditions.
@@ -307,11 +307,11 @@ Consider an arbitrary 2nd-order partial differential equation. In the following 
 Once the form of the trial function has been determined, it can be used to create an error function for the network:
 
 \begin{equation}
-  E = \sum_{i=1}^n G(\mathbf x_i,\psi_{ti},\mathbf \nabla \psi_{ti},\mathbf \nabla \mathbf \nabla \psi_{ti})^2 = \sum_{i=1}^n G_i^2
+  E = \sum_{i=1}^n G(\mathbf x_i,\psi_{ti},\nabla \psi_{ti},\nabla \nabla \psi_{ti})^2 = \sum_{i=1}^n G_i^2
   \label{eq:errorfunction}
 \end{equation}
 
-\noindent where $n$ is the number of training points used by the neural network. This error function is then used as the metric, or cost function, for training the network. This is merely the simplest possible form for the error function - many variations on this approach are possible. For example, error functions can incorporate weighted contributions from the approximated values of $\mathbf \nabla \psi_{ti}$, $\mathbf \nabla \mathbf \nabla \psi_{ti}$, and other higher-level derivatives.
+\noindent where $n$ is the number of training points used by the neural network. This error function is then used as the metric, or cost function, for training the network. This is merely the simplest possible form for the error function - many variations on this approach are possible. For example, error functions can incorporate weighted contributions from the approximated values of $\nabla \psi_{ti}$, $\nabla \nabla \psi_{ti}$, and other higher-level derivatives.
 
 Training of the network can take several forms. The simplest approach is the so-called "delta rule", in which the parameters are adjusted by a small amount after each pass through the training loop:
 
@@ -345,7 +345,7 @@ To develop the Jacobian, we begin by applying the chain rule to the trial functi
   \frac {\partial G_i} {\partial p} = \frac {\partial G_i} {\partial \psi_{ti}} \frac {\partial \psi_{ti}} {\partial p} + \sum_{j=1}^m \frac {\partial G_i} {\partial \nabla_{ij} \psi_{ti}} \frac {\partial \nabla_{ij} \psi_{ti}} {\partial p} + \sum_{j=1}^m \frac {\partial G_i} {\partial \nabla_{ij}^2 \psi_{ti}} \frac {\partial \nabla_{ij}^2 \psi_{ti}} {\partial p}
 \end{equation}
 
-\noindent The analytical forms for the partial derivatives of $G_i$ are found using the form of the original differential equation, and are specific to the equation being solved. The individual terms of $\psi_{ti}$, $\mathbf \nabla \psi_{ti}$, and $\nabla^2 \psi_{ti}$ are treated as independent functions of $\mathbf x$ and $\mathbf p$  during this differentiation.
+\noindent The analytical forms for the partial derivatives of $G_i$ are found using the form of the original differential equation, and are specific to the equation being solved. The individual terms of $\psi_{ti}$, $\nabla \psi_{ti}$, and $\nabla^2 \psi_{ti}$ are treated as independent functions of $\mathbf x$ and $\mathbf p$  during this differentiation.
 
 To compute the derivatives of the trial function $\psi_{ti}$, we must incorporate knowledge of the structure of the neural network. Given the trial function structure shown above, the general forms of these derivatives are:
 
@@ -660,7 +660,7 @@ Note that these problems are initial value problems in time. In such cases, the 
 Consider the diffusion equation ($\nabla$ is the spatial gradient operator):
 
 \begin{equation}
-  G \left( \mathbf x, \psi, \mathbf \nabla \psi, \nabla^2 \psi \right) = \frac {\partial \psi} {\partial t} - D \nabla^2 \psi = 0
+  G \left( \mathbf x, \psi, \nabla \psi, \nabla^2 \psi \right) = \frac {\partial \psi} {\partial t} - D \nabla^2 \psi = 0
 \end{equation}
 
 \subsubsection{The One-Dimensional Diffusion Equation}
@@ -668,7 +668,7 @@ Consider the diffusion equation ($\nabla$ is the spatial gradient operator):
 In one spatial dimension, this becomes (note that $\mathbf x = (x,t)$:
 
 \begin{equation}
-  G \left( \mathbf x, \psi, \mathbf \nabla \psi, \nabla^2 \psi \right) = \frac {\partial \psi} {\partial t} - D \frac {\partial^2 \psi} {\partial^2 x} = 0
+  G \left( \mathbf x, \psi, \nabla \psi, \nabla^2 \psi \right) = \frac {\partial \psi} {\partial t} - D \frac {\partial^2 \psi} {\partial^2 x} = 0
 \end{equation}
 
 Assume the presence of Dirichlet boundary conditions:
@@ -718,7 +718,7 @@ A neural network was constructed using $H=10$ hidden nodes. All weights and bias
 In this case, the diffusion equation may be written as:
 
 \begin{equation}
-  G \left( \mathbf x, \psi, \mathbf \nabla \psi, \nabla^2 \psi \right) = \frac {\partial \psi} {\partial t} - D \left( \frac {\partial^2 \psi} {\partial^2 x} +  \frac {\partial^2 \psi} {\partial^2 y} \right) = 0
+  G \left( \mathbf x, \psi, \nabla \psi, \nabla^2 \psi \right) = \frac {\partial \psi} {\partial t} - D \left( \frac {\partial^2 \psi} {\partial^2 x} +  \frac {\partial^2 \psi} {\partial^2 y} \right) = 0
 \end{equation}
 
 Assume the presence of the following Dirichlet boundary conditions:
